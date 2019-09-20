@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CharacterCard from "./CharacterCard";
+import SearchForm from "./SearchForm";
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
@@ -10,7 +11,7 @@ export default function CharacterList() {
     axios
       .get("https://rickandmortyapi.com/api/character/")
       .then(res => {
-        console.log(res.data.results);
+        // console.log(res.data.results);
         setCharacter(res.data.results);
       })
       .catch(err => {
@@ -22,6 +23,7 @@ export default function CharacterList() {
 
   return (
     <section className="character-list">
+      <SearchForm character={character} />
       {character.map((char, index) => {
         return (
           <CharacterCard
@@ -34,7 +36,6 @@ export default function CharacterList() {
           />
         );
       })}
-      <h2>TODO: `array.map()` over your state here!</h2>
     </section>
   );
 }

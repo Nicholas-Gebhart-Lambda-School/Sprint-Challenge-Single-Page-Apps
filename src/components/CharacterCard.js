@@ -1,14 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const DisplayCard = styled.div`
+  border: 2px solid black;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 2%;
+`;
 
 export default function CharacterCard(props) {
-  console.log("card props", props);
   return (
-    <div>
-      <h1>name: {props.name}</h1>
-      <h2>from: {props.origin}</h2>
-      <h2>species: {props.species}</h2>
-      <h2>last known location: {props.location}</h2>
-    </div>
+    <DisplayCard>
+      <h1>Name: {props.name}</h1>
+      <h2>From: {props.origin}</h2>
+      <h2>Species: {props.species}</h2>
+      <h2>Last known location: {props.location}</h2>
+    </DisplayCard>
   );
 }
