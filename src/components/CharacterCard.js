@@ -9,10 +9,9 @@ const DisplayCard = styled.div`
 `;
 
 export default function CharacterCard(props) {
-  console.log("card", props);
   return (
     <DisplayCard>
-      <p>{props.char}</p>
+      <h1>{props.char}</h1>
     </DisplayCard>
   );
 }

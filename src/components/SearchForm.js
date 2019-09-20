@@ -31,9 +31,8 @@ function SearchForm({ character }) {
         />
       </form>
       <section className="character-list">
-        {console.log(searchResults)}
-        {searchResults.map(char => {
-          return <CharacterCard char={char} />;
+        {searchResults.map((char, index) => {
+          return <CharacterCard char={char} key={index} />;
         })}
       </section>
     </section>
