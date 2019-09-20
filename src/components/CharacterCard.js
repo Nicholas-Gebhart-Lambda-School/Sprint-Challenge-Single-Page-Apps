@@ -9,12 +9,10 @@ const DisplayCard = styled.div`
 `;
 
 export default function CharacterCard(props) {
+  console.log("card", props);
   return (
     <DisplayCard>
-      <h1>Name: {props.name}</h1>
-      <h2>From: {props.origin}</h2>
-      <h2>Species: {props.species}</h2>
-      <h2>Last known location: {props.location}</h2>
+      <p>{props.char}</p>
     </DisplayCard>
   );
 }
