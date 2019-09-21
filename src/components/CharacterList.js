@@ -1,31 +1,56 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import Axios from "axios";
 import CharacterCard from "./CharacterCard";
-import SearchForm from "./SearchForm";
 
-export default function CharacterList() {
-  // TODO: Add useState to track data from useEffect
-  const [character, setCharacter] = useState([]);
+function CharacterList() {
+  const [characterState, setCharacterState] = useState([]);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
-    axios
-      .get("https://rickandmortyapi.com/api/character/")
+    Axios.get("https://rickandmortyapi.com/api/character/")
       .then(res => {
-        // console.log(res.data.results);
-        setCharacter(res.data.results);
+        const data = res.data.results;
+        const result = data.filter(character =>
+          character.name.toLowerCase().includes(query.toLowerCase())
+        );
+        console.log("result", result);
+        setCharacterState(result);
       })
       .catch(err => {
-        console.error("there was an error", err);
+        console.error("error", err);
       });
-    // TODO: Add API Request here - must run in `useEffect`
-    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
-  }, []);
+  }, [query]);
 
+  const inputHandler = e => {
+    setQuery(e.target.value);
+  };
   return (
-    <section className="character-list">
-      <SearchForm character={character} />
-
-      <h1>List</h1>
-    </section>
+    //
+    <div>
+      <form>
+        <input
+          type="text"
+          onChange={inputHandler}
+          value={query}
+          name="name"
+          placeholder="Search"
+        />
+      </form>
+      <div>
+        {characterState.map(char => {
+          return (
+            <CharacterCard
+              name={char.name}
+              gender={char.gender}
+              origin={char.origin.name}
+              species={char.species}
+              status={char.status}
+            />
+          );
+        })}
+      </div>
+    </div>
   );
 }
+
+export default CharacterList;
